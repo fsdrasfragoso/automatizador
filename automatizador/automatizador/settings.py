@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ejqwo@)qe5k2x!slv+4$k1%z_8z#1i(6b9bhrz!9hx)ym7!=7i'
+SECRET_KEY = 'django-insecure-jg+7twvtbzc^mr!*pu8+u=-#ufv$-euy&ni4o7oaty!4(6i^bz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,12 +75,8 @@ WSGI_APPLICATION = 'automatizador.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'automatizador',
-        'HOST': 'localhost',
-        'USER': 'esdras',
-        'PASSWORD':'ecioj',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
