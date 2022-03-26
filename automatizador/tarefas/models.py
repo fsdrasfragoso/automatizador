@@ -1,8 +1,12 @@
 from django.db import models
 
 # Create your models here.
+
 class TaskGroups(models.Model):
     name = models.CharField(max_length=200)
+    r = models.IntegerField(blank=True, null=True)
+    g = models.IntegerField(blank=True, null=True)
+    b = models.IntegerField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
 

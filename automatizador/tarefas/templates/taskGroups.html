@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+{% for taskGroup in taskGroups %}
 <div class="col-lg-3 col-6">       
     <!-- small box -->
-    <div class="small-box bg-info">
+    <div class="small-box bg-info" style="background-color: rgb({{taskGroup.r}} {{taskGroup.g}} {{taskGroup.b}}) !important">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{ taskGroup.name }}</h3>
 
-          <p>New Orders</p>
+          <p> Para visualizar:</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Clique Aqui <i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>
+{%endfor%}
 {% endblock %}
    
