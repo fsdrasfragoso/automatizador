@@ -5,8 +5,11 @@
 		private static $usuario = 'esdras';
 		private static $senha = 'ecioj';
 		private static $banco = 'automatizador';
-		static function getConn(){
-			if(is_null(self::$conn)){
+		static function getConn()
+		{
+			if(is_null(self::$conn))
+			{
+				
 				self::$conn = new PDO('mysql:host='.self::$host.';dbname='.self::$banco,self::$usuario,self::$senha);
 				self::$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 			}
@@ -14,7 +17,8 @@
 		}
 	}
 	
-	function logErros($errno){
+	function logErros($errno)
+	{
 		
 		if(error_reporting()==0) return;
 		

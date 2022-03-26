@@ -4,7 +4,8 @@ ini_set('display_errors', 1);
 include('classes/DB.class.php');
 include('classes/Insert.class.php');
 
-print_r(Insert::getTaskGorups()); exit;
+echo '<pre>';
+print_r(Insert::getTasks()); exit;
 
 
 ?>
