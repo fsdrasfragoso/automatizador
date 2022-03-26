@@ -1,6 +1,6 @@
 <?php 
 class Insert{    
-    static function getTaskGorups($colunas,$where, $titulo){
+    public static function getTaskGorups(){
         $sql = "SELECT * FROM task_groups;";
         $select = DB::getConn()->prepare($sql);
         $select->execute();
