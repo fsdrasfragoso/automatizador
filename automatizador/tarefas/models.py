@@ -21,7 +21,7 @@ class Tasks(models.Model):
     creation_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
     previous_status = models.CharField(max_length=10, blank=True, null=True)
-    tesk_group = models.ForeignKey(TaskGroups, models.DO_NOTHING)
+    task_group = models.ForeignKey(TaskGroups, models.DO_NOTHING)
 
     class Meta:
         managed = False

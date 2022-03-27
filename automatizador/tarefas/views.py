@@ -18,3 +18,10 @@ def task_groups(request):
         'taskGroups':taskGroups
     }   
     return render(request,'taskGroups.html',context)
+
+def tasks(request,task_group):
+    tasks = Tasks.objects.all().filter(task_group=task_group)
+    context = {
+        'tasks':tasks
+    }
+    return render(request,'tasks.html',context)

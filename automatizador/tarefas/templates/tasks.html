@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card border">
+    <div class="card-body">
+        <h5 class="card-title">Cadastro de Produtos</h5>
+
+
+        <table class="table table-ordered table-hover" id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Task Name</th>
+                    <th>Status</th>
+                    <th>Previous Status</th>
+                    <th>Group Task</th>
+                    <th>Creation Date</th>
+                    <th>Update Date</th>                    
+                    <th> Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Código</td>
+                    <td>Task Name</td>
+                    <td>Status</td>
+                    <td>Previous Status</td>
+                    <td>Group Task</td>
+                    <td>Creation Date</td>
+                    <td>Update Date</td>                    
+                    <td> <a href="#" class="btn btn-sm btn-secondary">Change</a> </td>
+                </tr>   
+            </tbody>
+        </table>
+     
+    </div>
+    <div class="card-footer">
+       <a class="btn btn-sm btn-primary" role="button" href="#">New Task</a>
+    </div>
+</div>
+{% endblock %}
