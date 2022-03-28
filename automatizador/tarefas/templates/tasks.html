@@ -20,8 +20,8 @@
             </thead>
             <tbody>                
                 {% for task in tasks %}
-                <tr>
-                    <td>Código</td>
+                <tr style="">
+                    <td>{{ task.id }}</td>
                     <td>{{ task.name }}</td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.previous_status }}</td>
