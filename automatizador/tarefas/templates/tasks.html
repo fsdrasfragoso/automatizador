@@ -18,17 +18,19 @@
                     <th> Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>                
+                {% for task in tasks %}
                 <tr>
                     <td>Código</td>
-                    <td>Task Name</td>
-                    <td>Status</td>
-                    <td>Previous Status</td>
-                    <td>Group Task</td>
-                    <td>Creation Date</td>
-                    <td>Update Date</td>                    
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.previous_status }}</td>
+                    <td>{{nameTaskGroup}}</td>
+                    <td>{{task.creation_date}}</td>
+                    <td>{{task.update_date}}</td>                    
                     <td> <a href="#" class="btn btn-sm btn-secondary">Change</a> </td>
-                </tr>   
+                </tr>  
+                {%endfor%} 
             </tbody>
         </table>
      

@@ -20,8 +20,9 @@ def task_groups(request):
     return render(request,'taskGroups.html',context)
 
 def tasks(request,task_group):
-    tasks = Tasks.objects.all().filter(task_group=task_group)
-    context = {
-        'tasks':tasks
-    }
+    tasks = Tasks.objects.filter(task_group=task_group) 
+    nameTaskGroup = TaskGroups.objects.filter(id=task_group)
+    context = {}      
+    context['tasks'] = tasks
+    context['nameTaskGroup'] = nameTaskGroup[0].name      
     return render(request,'tasks.html',context)
