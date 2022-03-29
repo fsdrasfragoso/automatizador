@@ -28,4 +28,6 @@ def tasks(request,task_group):
     return render(request,'tasks.html',context)
 
 def updateStatusTask(request):
+    taskInstance = Tasks()
+    taskInstance
     return HttpResponse("Funcionou")
