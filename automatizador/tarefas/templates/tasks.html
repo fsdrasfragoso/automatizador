@@ -2,10 +2,10 @@
 {% block content %}
 <div class="card border">
     <div class="card-body">
-        <h5 class="card-title">Cadastro de Produtos</h5>
+        <h5 class="card-title">Cadastro de Tasks</h5>
 
 
-        <table class="table table-ordered table-hover" id="tabelaProdutos">
+        <table class="table table-ordered table-hover" id="tabelaTasks">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -28,7 +28,7 @@
                     <td>{{nameTaskGroup}}</td>
                     <td>{{task.creation_date}}</td>
                     <td>{{task.update_date}}</td>                    
-                    <td> <a href="#" class="btn btn-sm btn-secondary">Change</a> </td>
+                    <td> <a href="javascript:changeTask({{ task.id }})" class="btn btn-sm btn-secondary">Change</a> </td>
                 </tr>  
                 {%endfor%} 
             </tbody>
@@ -40,15 +40,25 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="dlgProdutos">
+<div class="modal" tabindex="-1" role="dialog" id="dlgTasks">
     <div class="modal-dialog" role="document"> 
         <div class="modal-content">
-            <form class="form-horizontal" id="formProduto" enctype="multipart/form-data">
+            <form class="form-horizontal" id="formTask" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title">Novo produto</h5>
+                    <h5 class="modal-title">Novo Task</h5>
                 </div>
                 <div class="modal-body">
-                    teste
+                    <div class="form-group">
+                        <label for="statusTask" class="control-label">Change Status</label>
+                        <div class="input-group">
+                            <select class="form-control" id="statusTask">                               
+                                <option value="running"> running </option>
+                                <option value="success"> success </option>
+                                <option value="error"> error </option>
+                                <option value="stop"> stop </option>
+                            </select>    
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -62,9 +72,16 @@
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript">
-    function changeTask()
+    function changeTask(id)
     {
-        $('#dlgProdutos').modal('show');
+        $('#dlgTasks').modal('show');
     }
+
+    $("#formTask").submit( function(event){ 
+        event.preventDefault(); 
+        
+            
+        $("#dlgProdutos").modal('hide');
+    });
 </script>
 {% endblock %}

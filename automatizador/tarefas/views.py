@@ -26,3 +26,6 @@ def tasks(request,task_group):
     context['tasks'] = tasks
     context['nameTaskGroup'] = nameTaskGroup[0].name      
     return render(request,'tasks.html',context)
+
+def updateStatusTask(request):
+    return HttpResponse("Funcionou")
