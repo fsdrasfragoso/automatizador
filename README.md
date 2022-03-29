@@ -5,3 +5,6 @@
 
 **Desative o ambiente virtual**
 - deactivate
+
+**Rodar Projeto**
+- python3 manage.py runserver
