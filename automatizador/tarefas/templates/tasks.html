@@ -76,12 +76,30 @@
     {
         $('#dlgTasks').modal('show');
     }
+    
+    function salvarStatusTask()
+    {
+        $("#dlgTasks").modal('hide');
+        var settings =
+            {
+                "async": true,
+                "crossDomain": true,
+                "url": "{% url 'update_status_task' %}",
+                "method": "POST",                
+                "data" : $('#formTask').serialize()
+            };
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+    }
 
     $("#formTask").submit( function(event){ 
         event.preventDefault(); 
         
-            
-        $("#dlgProdutos").modal('hide');
+        salvarStatusTask();   
+        
     });
+
+    
 </script>
 {% endblock %}

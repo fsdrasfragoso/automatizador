@@ -2,7 +2,7 @@ from asyncio import Task
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
 from .models import TaskGroups 
 from .models import Tasks
 
@@ -27,7 +27,7 @@ def tasks(request,task_group):
     context['nameTaskGroup'] = nameTaskGroup[0].name      
     return render(request,'tasks.html',context)
 
+@csrf_exempt
 def updateStatusTask(request):
     taskInstance = Tasks()
-    taskInstance
     return HttpResponse("Funcionou")
