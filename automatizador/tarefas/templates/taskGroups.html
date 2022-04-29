@@ -6,8 +6,13 @@
     <div class="small-box bg-info" style="background-color: rgb({{taskGroup.r}} {{taskGroup.g}} {{taskGroup.b}}) !important">
         <div class="inner">
           <h3>{{ taskGroup.name }}</h3>
-
-          <p> Para visualizar:</p>
+          <p> Tarefas com error:</p>
+          {%for t in taskGroup.tasks_set.all %} 
+              {% if t.status == 'error' %}
+                <p> {{ t.name }} <p>
+              {% endif %}    
+          {%endfor%}
+         
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>

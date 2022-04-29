@@ -13,7 +13,7 @@ def home(request):
     return render(request,'home.html')
 
 def task_groups(request):
-    taskGroups = TaskGroups.objects.all()
+    taskGroups = TaskGroups.objects.all().prefetch_related('tasks_set')       
     context = {
         'taskGroups':taskGroups
     }   
