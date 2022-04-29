@@ -29,5 +29,5 @@ def tasks(request,task_group):
 
 @csrf_exempt
 def updateStatusTask(request):
-    taskInstance = Tasks.objects.filter(id=task_group)
-    return HttpResponse("Funcionou")
+    taskInstance = Tasks.objects.filter(id=request.POST.get("idTask", ""))
+    return HttpResponse(taskInstance[0].status)

@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label for="statusTask" class="control-label">Change Status</label>
                         <div class="input-group">
-                            <select class="form-control" id="statusTask">                               
+                            <select class="form-control" id="statusTask" name="statusTask">                               
                                 <option value="running"> running </option>
                                 <option value="success"> success </option>
                                 <option value="error"> error </option>
@@ -60,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" value="" name="idTask" id="idTask" />
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -74,12 +75,14 @@
 <script type="text/javascript">
     function changeTask(id)
     {
+        $('#idTask').val(id);
         $('#dlgTasks').modal('show');
     }
     
     function salvarStatusTask()
     {
         $("#dlgTasks").modal('hide');
+        
         var settings =
             {
                 "async": true,
