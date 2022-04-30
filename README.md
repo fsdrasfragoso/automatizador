@@ -81,7 +81,29 @@ WHERE
 						`update_date` = NOW()
 			WHERE
 							`status` IN ('running')
-        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;              	 	
+        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;   
+       UPDATE `automatizador`.`task_groups`
+SET `r` = '32',
+ `g` = '150',
+ `b` = '23',
+ `update_date` = NOW()
+WHERE
+	id NOT IN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					tg.id AS id
+				FROM
+					task_groups AS tg
+				INNER JOIN tasks AS t ON t.task_group_id = tg.id
+				WHERE
+					t.`status` = 'error'
+				GROUP BY
+					tg.id
+			) AS j
+	);              	 	
        
 END
 DELIMITER;
