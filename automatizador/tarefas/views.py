@@ -16,7 +16,8 @@ def home(request):
 def task_groups(request):
     taskGroups = TaskGroups.objects.all().prefetch_related('tasks_set')       
     context = {
-        'taskGroups':taskGroups
+        'taskGroups':taskGroups,
+         'i':0
     }   
     return render(request,'taskGroups.html',context)
 
@@ -33,7 +34,7 @@ def updateStatusTask(request):
     taskInstance = Tasks.objects.filter(id=request.POST.get("idTask", ""))
     for t in taskInstance:
         t.previous_status = t.status
-        t.status = request.POST.get("statusTask", "")
+        t.status = 'success'
         t.update_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         t.save()
     return HttpResponse(taskInstance[0].id)

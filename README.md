@@ -10,6 +10,11 @@
 **Rodar Projeto**
 - python3 manage.py runserver
 
+**Campos que precisam a mais**
+- Quantidade
+- Frenquencia
+- Tempo Inicial e  
+
 **Comandos para executar dentro do Mysql**
 - SHOW VARIABLES LIKE 'event%';
 - SET GLOBAL event_scheduler = ON;

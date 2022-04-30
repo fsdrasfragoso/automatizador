@@ -10,9 +10,10 @@
         <div class="inner">
           <h3>{{ taskGroup.name }}</h3>
           <p> Tarefas com error:</p>
+          
           {%for t in taskGroup.tasks_set.all %} 
               {% if t.status == 'error' %}
-                <p> {{ t.name }} <p>
+                <p> {{ t.name }} <p>                 
               {% endif %}    
           {%endfor%}
          
