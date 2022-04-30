@@ -45,12 +45,35 @@ ON SCHEDULE EVERY 1 MINUTE
 STARTS '2022-04-29 23:00:00'
 DO
 BEGIN
+      UPDATE `automatizador`.`task_groups`
+SET `r` = '150',
+ `g` = '20',
+ `b` = '34',
+ `update_date` = NOW()
+WHERE
+	id IN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					tg.id AS id
+				FROM
+					task_groups AS tg
+				INNER JOIN tasks AS t ON t.task_group_id = tg.id
+				WHERE
+					t.`status` IN ('running')
+				AND NOW() > t.`update_date` + INTERVAL 5 MINUTE
+				GROUP BY
+					tg.id
+			) AS j
+	); 
 			UPDATE `automatizador`.`tasks`
 			SET 
 						`previous_status` = `status`
 			WHERE
 						`status`IN ('running')
-                AND NOW()  > `update_date` + INTERVAL 5 MINUTE;  
+       AND NOW()  > `update_date` + INTERVAL 5 MINUTE;   
 
       UPDATE `automatizador`.`tasks`
 			SET 
@@ -58,7 +81,7 @@ BEGIN
 						`update_date` = NOW()
 			WHERE
 							`status` IN ('running')
-        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;               	 	
+        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;              	 	
        
-END//
+END
 DELIMITER;
