@@ -49,7 +49,8 @@ BEGIN
 			SET 
 						`previous_status` = `status`
 			WHERE
-						`status`IN ('running');
+						`status`IN ('running')
+                AND NOW()  > `update_date` + INTERVAL 5 MINUTE;  
 
       UPDATE `automatizador`.`tasks`
 			SET 
@@ -57,7 +58,7 @@ BEGIN
 						`update_date` = NOW()
 			WHERE
 							`status` IN ('running')
-        AND `update_date` >  NOW() + INTERVAL 5 MINUTE;             	 	
+        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;               	 	
        
 END//
 DELIMITER;
