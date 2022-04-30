@@ -1,5 +1,6 @@
 # Lista de Comandos Uteis para o Projeto 
-
+**Artigo UTIL**
+- http://pythonclub.com.br/django-introducao-queries.html
 **Ative o ambiente virtual**
 - source automatizador_env/bin/activate
 
