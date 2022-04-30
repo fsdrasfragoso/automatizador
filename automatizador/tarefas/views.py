@@ -1,6 +1,6 @@
 from asyncio import Task
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -8,7 +8,7 @@ from .models import TaskGroups
 from .models import Tasks
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return redirect('task_groups')
 
 def home(request):
     return render(request,'home.html')

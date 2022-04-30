@@ -1,1 +1,18 @@
-<h3> Hellor </h3>
+{% block content %}
+{% endblock %}
+{% block javascript %}
+<script>
+    window.onload = function () {
+        var settings =
+        {
+            "async": true,
+            "crossDomain": true,
+            "url": "{% url 'task_groups' %}",
+            "method": "GET"
+        };
+        $.ajax(settings).done(function (response) {
+             
+        });
+    }
+  </script>
+{% endblock %}
