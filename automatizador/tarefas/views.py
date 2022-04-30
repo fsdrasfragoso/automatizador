@@ -2,6 +2,7 @@ from asyncio import Task
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
+from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .models import TaskGroups 
 from .models import Tasks
@@ -31,6 +32,8 @@ def tasks(request,task_group):
 def updateStatusTask(request):
     taskInstance = Tasks.objects.filter(id=request.POST.get("idTask", ""))
     for t in taskInstance:
+        t.previous_status = t.status
         t.status = request.POST.get("statusTask", "")
+        t.update_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         t.save()
     return HttpResponse(taskInstance[0].id)
