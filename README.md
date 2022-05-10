@@ -113,3 +113,35 @@ WHERE
        
 END
 DELIMITER;
+
+
+**tgr_update_tasks**
+
+CREATE TRIGGER tgr_update_tasks AFTER UPDATE
+ON tasks
+FOR EACH ROW
+BEGIN
+	INSERT INTO `automatizador`.`log_tasks` (	
+	`task_id`,
+	`name`,
+	`status`,
+	`frequency`,
+	`time_unit_of_execution_frequency`,
+	`unit_of_time_to_trigger_error`,
+	`creation_date`,
+	`update_date`,
+	`previous_status`
+)
+VALUES
+	(
+		OLD.id,
+		OLD.`name`,
+		OLD.`status`,
+		OLD.`frequency`,
+		OLD.`time_unit_of_execution_frequency`,
+		OLD.`unit_of_time_to_trigger_error`,
+		OLD.`creation_date`,
+		OLD.`update_date`,
+		OLD.`previous_status`
+	);
+END
