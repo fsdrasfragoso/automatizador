@@ -20,6 +20,10 @@ class TaskGroups(models.Model):
 class Tasks(models.Model):
     name = models.CharField(max_length=200)
     status = models.CharField(max_length=7, blank=True, null=True)
+    frequency = models.CharField(max_length=7, blank=True, null=True)
+    time_unit_of_execution_frequency = models.IntegerField(blank=True, null=True)
+    unit_of_time_to_trigger_error = models.IntegerField(blank=True, null=True)
+    creation_date = models.DateTimeField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
     previous_status = models.CharField(max_length=10, blank=True, null=True)
