@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 80028
+Source Server Version : 80029
 Source Host           : localhost:3306
 Source Database       : automatizador
 
 Target Server Type    : MYSQL
-Target Server Version : 80028
+Target Server Version : 80029
 File Encoding         : 65001
 
-Date: 2022-04-04 19:24:59
+Date: 2022-05-09 22:11:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -114,7 +114,7 @@ CREATE TABLE `auth_user` (
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$320000$4Mfbob16CQrT78WBkl1dTg$z+zEmmlVJSgsGMHe3GhRlDSQesYyIHP6mJVbEU18A2U=', '2022-03-20 21:24:30.899372', '1', 'admin', '', '', 'esdrasfragoso@gmail.com', '1', '1', '2022-03-20 21:23:50.444384');
+INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$320000$4Mfbob16CQrT78WBkl1dTg$z+zEmmlVJSgsGMHe3GhRlDSQesYyIHP6mJVbEU18A2U=', '2022-04-30 20:19:48.379416', '1', 'admin', '', '', 'esdrasfragoso@gmail.com', '1', '1', '2022-03-20 21:23:50.444384');
 
 -- ----------------------------
 -- Table structure for auth_user_groups
@@ -173,7 +173,7 @@ CREATE TABLE `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -181,6 +181,7 @@ CREATE TABLE `django_admin_log` (
 INSERT INTO `django_admin_log` VALUES ('1', '2022-03-20 21:33:46.587278', '2', 'TaskGroups object (2)', '1', '[{\"added\": {}}]', '7', '1');
 INSERT INTO `django_admin_log` VALUES ('3', '2022-03-20 21:36:07.096788', '2', 'Tasks object (2)', '3', '', '8', '1');
 INSERT INTO `django_admin_log` VALUES ('4', '2022-03-20 21:36:19.451259', '1', 'TaskGroups object (1)', '3', '', '7', '1');
+INSERT INTO `django_admin_log` VALUES ('5', '2022-04-30 20:22:12.712183', '53', 'Tasks object (53)', '1', '[{\"added\": {}}]', '8', '1');
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -255,6 +256,31 @@ CREATE TABLE `django_session` (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
+INSERT INTO `django_session` VALUES ('gidctq0lo32wdftvcnl6htmrl5s9pdie', '.eJxVjDsOwjAQRO_iGln-Zr2U9DmDtf7hAHKkOKkQdyeRUkA5897Mm3na1uq3nhc_JXZlkl1-u0DxmdsB0oPafeZxbusyBX4o_KSdj3PKr9vp_h1U6nVfY8IByCkAZY0MgFgcautAkC5EMBQyRpCKNu3BIRQbdUGrVUggZGCfL79nNzU:1nktZE:F8USfQHAYhG3Yrfzt1V-KCzQmHwxJ5YYHmrbguSXb4o', '2022-05-14 20:19:48.383862');
+
+-- ----------------------------
+-- Table structure for log_tasks
+-- ----------------------------
+DROP TABLE IF EXISTS `log_tasks`;
+CREATE TABLE `log_tasks` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `task_id` int NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `status` enum('running','success','error','stop') DEFAULT NULL,
+  `frequency` enum('seconds','minutes','hours','days','weeks','months','years') DEFAULT NULL,
+  `time_unit_of_execution_frequency` int DEFAULT NULL,
+  `unit_of_time_to_trigger_error` int DEFAULT NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  `previous_status` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_task_id` (`task_id`),
+  CONSTRAINT `fk_task_id` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- ----------------------------
+-- Records of log_tasks
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for task_groups
@@ -274,11 +300,11 @@ CREATE TABLE `task_groups` (
 -- ----------------------------
 -- Records of task_groups
 -- ----------------------------
-INSERT INTO `task_groups` VALUES ('2', 'Tarefa tipo 01', '150', '20', '34', '2022-03-20 21:33:23', '2022-03-26 15:07:30');
-INSERT INTO `task_groups` VALUES ('3', 'Tarefa tipo 02', '150', '20', '34', '2022-03-20 21:33:23', '2022-03-26 15:07:30');
-INSERT INTO `task_groups` VALUES ('4', 'Tarefa tipo 03', '150', '20', '34', '2022-03-20 21:33:23', '2022-03-26 15:07:30');
-INSERT INTO `task_groups` VALUES ('5', 'Tarefa tipo 04', '32', '150', '23', '2022-03-20 21:33:23', '2022-03-20 21:33:43');
-INSERT INTO `task_groups` VALUES ('6', 'Tarefa tipo 05', '150', '20', '34', '2022-03-20 21:33:23', '2022-03-26 15:07:30');
+INSERT INTO `task_groups` VALUES ('2', 'GRUPO de Tarefa tipo 01', '150', '20', '34', '2022-03-20 21:33:23', '2022-04-30 18:03:00');
+INSERT INTO `task_groups` VALUES ('3', 'GRUPO deTarefa tipo 02', '150', '20', '34', '2022-03-20 21:33:23', '2022-04-30 17:18:00');
+INSERT INTO `task_groups` VALUES ('4', 'GRUPO de Tarefa tipo 03', '150', '20', '34', '2022-03-20 21:33:23', '2022-04-30 17:18:00');
+INSERT INTO `task_groups` VALUES ('5', 'GRUPO de Tarefa tipo 04', '150', '20', '34', '2022-03-20 21:33:23', '2022-04-30 17:18:00');
+INSERT INTO `task_groups` VALUES ('6', 'GRUPO de Tarefa tipo 05', '150', '20', '34', '2022-03-20 21:33:23', '2022-04-30 17:18:00');
 
 -- ----------------------------
 -- Table structure for tasks
@@ -288,6 +314,9 @@ CREATE TABLE `tasks` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `status` enum('running','success','error','stop') DEFAULT NULL,
+  `frequency` enum('seconds','minutes','hours','days','weeks','months','years') DEFAULT 'minutes',
+  `time_unit_of_execution_frequency` int DEFAULT '15',
+  `unit_of_time_to_trigger_error` int DEFAULT '5',
   `creation_date` timestamp NULL DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   `previous_status` varchar(10) DEFAULT NULL,
@@ -295,58 +324,152 @@ CREATE TABLE `tasks` (
   PRIMARY KEY (`id`),
   KEY `tesk_group_id` (`task_group_id`),
   CONSTRAINT `tesk_group_id` FOREIGN KEY (`task_group_id`) REFERENCES `task_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of tasks
 -- ----------------------------
-INSERT INTO `tasks` VALUES ('3', 'Tarefa Número 1', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('4', 'Tarefa Número 2', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('5', 'Tarefa Número 3', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('6', 'Tarefa Número 4', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('7', 'Tarefa Número 5', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('8', 'Tarefa Número 6', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('9', 'Tarefa Número 7', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('10', 'Tarefa Número 8', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('11', 'Tarefa Número 9', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('12', 'Tarefa Número 10', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '2');
-INSERT INTO `tasks` VALUES ('13', 'Tarefa Número 1', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('14', 'Tarefa Número 2', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('15', 'Tarefa Número 3', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('16', 'Tarefa Número 4', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('17', 'Tarefa Número 5', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('18', 'Tarefa Número 6', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('19', 'Tarefa Número 7', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('20', 'Tarefa Número 8', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('21', 'Tarefa Número 9', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('22', 'Tarefa Número 10', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '3');
-INSERT INTO `tasks` VALUES ('23', 'Tarefa Número 1', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('24', 'Tarefa Número 2', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('25', 'Tarefa Número 3', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('26', 'Tarefa Número 4', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('27', 'Tarefa Número 5', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('28', 'Tarefa Número 6', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('29', 'Tarefa Número 7', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('30', 'Tarefa Número 8', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('31', 'Tarefa Número 9', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('32', 'Tarefa Número 10', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '4');
-INSERT INTO `tasks` VALUES ('33', 'Tarefa Número 1', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('34', 'Tarefa Número 2', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('35', 'Tarefa Número 3', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('36', 'Tarefa Número 4', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('37', 'Tarefa Número 5', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('38', 'Tarefa Número 6', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('39', 'Tarefa Número 7', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('40', 'Tarefa Número 8', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('41', 'Tarefa Número 9', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('42', 'Tarefa Número 10', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '5');
-INSERT INTO `tasks` VALUES ('43', 'Tarefa Número 1', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('44', 'Tarefa Número 2', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('45', 'Tarefa Número 3', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('46', 'Tarefa Número 4', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('47', 'Tarefa Número 5', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('48', 'Tarefa Número 6', 'error', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('49', 'Tarefa Número 7', 'success', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('50', 'Tarefa Número 8', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('51', 'Tarefa Número 9', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
-INSERT INTO `tasks` VALUES ('52', 'Tarefa Número 10', 'running', '2022-03-26 15:07:30', '2022-03-26 15:07:30', 'stop', '6');
+INSERT INTO `tasks` VALUES ('3', 'Tarefa Número 1', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 18:03:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('4', 'Tarefa Número 2', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('5', 'Tarefa Número 3', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('6', 'Tarefa Número 4', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('7', 'Tarefa Número 5', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('8', 'Tarefa Número 6', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('9', 'Tarefa Número 7', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('10', 'Tarefa Número 8', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('11', 'Tarefa Número 9', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('12', 'Tarefa Número 10', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '2');
+INSERT INTO `tasks` VALUES ('13', 'Tarefa Número 1', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('14', 'Tarefa Número 2', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('15', 'Tarefa Número 3', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('16', 'Tarefa Número 4', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('17', 'Tarefa Número 5', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('18', 'Tarefa Número 6', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('19', 'Tarefa Número 7', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('20', 'Tarefa Número 8', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('21', 'Tarefa Número 9', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('22', 'Tarefa Número 10', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '3');
+INSERT INTO `tasks` VALUES ('23', 'Tarefa Número 1', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('24', 'Tarefa Número 2', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('25', 'Tarefa Número 3', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('26', 'Tarefa Número 4', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('27', 'Tarefa Número 5', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('28', 'Tarefa Número 6', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('29', 'Tarefa Número 7', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('30', 'Tarefa Número 8', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('31', 'Tarefa Número 9', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('32', 'Tarefa Número 10', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '4');
+INSERT INTO `tasks` VALUES ('33', 'Tarefa Número 1', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('34', 'Tarefa Número 2', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('35', 'Tarefa Número 3', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('36', 'Tarefa Número 4', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('37', 'Tarefa Número 5', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('38', 'Tarefa Número 6', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 20:03:33', 'success', '5');
+INSERT INTO `tasks` VALUES ('39', 'Tarefa Número 7', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('40', 'Tarefa Número 8', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('41', 'Tarefa Número 9', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('42', 'Tarefa Número 10', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '5');
+INSERT INTO `tasks` VALUES ('43', 'Tarefa Número 1', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('44', 'Tarefa Número 2', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('45', 'Tarefa Número 3', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('46', 'Tarefa Número 4', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('47', 'Tarefa Número 5', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 17:18:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('48', 'Tarefa Número 6', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 15:33:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('49', 'Tarefa Número 7', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 15:33:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('50', 'Tarefa Número 8', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 15:33:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('51', 'Tarefa Número 9', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 15:33:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('52', 'Tarefa Número 10', 'error', 'minutes', '15', '5', '2022-03-26 15:07:30', '2022-04-30 15:33:00', 'running', '6');
+INSERT INTO `tasks` VALUES ('53', 'Tarefas Teste', 'error', 'minutes', '15', '5', '2022-04-09 06:00:00', '2022-04-30 17:23:00', 'running', '2');
+
+-- ----------------------------
+-- Event structure for atribui_erro
+-- ----------------------------
+DROP EVENT IF EXISTS `atribui_erro`;
+DELIMITER ;;
+CREATE DEFINER=`esdras`@`localhost` EVENT `atribui_erro` ON SCHEDULE EVERY 1 MINUTE STARTS '2022-04-29 23:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+      UPDATE `automatizador`.`task_groups`
+SET `r` = '150',
+ `g` = '20',
+ `b` = '34',
+ `update_date` = NOW()
+WHERE
+	id IN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					tg.id AS id
+				FROM
+					task_groups AS tg
+				INNER JOIN tasks AS t ON t.task_group_id = tg.id
+				WHERE
+					t.`status` IN ('running')
+				AND NOW() > t.`update_date` + INTERVAL 5 MINUTE
+				GROUP BY
+					tg.id
+			) AS j
+	); 
+			UPDATE `automatizador`.`tasks`
+			SET 
+						`previous_status` = `status`
+			WHERE
+						`status`IN ('running')
+       AND NOW()  > `update_date` + INTERVAL 5 MINUTE;   
+
+      UPDATE `automatizador`.`tasks`
+			SET 
+						`status` = 'error', 
+						`update_date` = NOW()
+			WHERE
+							`status` IN ('running')
+        AND NOW()  > `update_date` + INTERVAL 5 MINUTE;   
+       UPDATE `automatizador`.`task_groups`
+SET `r` = '32',
+ `g` = '150',
+ `b` = '23',
+ `update_date` = NOW()
+WHERE
+	id NOT IN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					tg.id AS id
+				FROM
+					task_groups AS tg
+				INNER JOIN tasks AS t ON t.task_group_id = tg.id
+				WHERE
+					t.`status` = 'error'
+				GROUP BY
+					tg.id
+			) AS j
+	);              	 	
+       
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Event structure for muda_satus
+-- ----------------------------
+DROP EVENT IF EXISTS `muda_satus`;
+DELIMITER ;;
+CREATE DEFINER=`esdras`@`localhost` EVENT `muda_satus` ON SCHEDULE EVERY 15 MINUTE STARTS '2022-04-29 23:27:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+			UPDATE `automatizador`.`tasks`
+			SET 
+						`previous_status` = `status`
+			WHERE
+						`status`IN ('success','running');
+
+      UPDATE `automatizador`.`tasks`
+			SET 
+						`status` = 'running', 
+						`update_date` = NOW() 
+			WHERE
+							`status`IN ('success','running');        	 	
+       
+END
+;;
+DELIMITER ;
