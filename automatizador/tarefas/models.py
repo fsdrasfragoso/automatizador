@@ -11,7 +11,7 @@ class TaskGroups(models.Model):
     update_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'task_groups'
 
 
@@ -24,5 +24,20 @@ class Tasks(models.Model):
     task_group = models.ForeignKey(TaskGroups, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tasks'
+
+class LogTasks(models.Model):
+    task = models.ForeignKey('Tasks', models.DO_NOTHING)
+    name = models.CharField(max_length=200)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    frequency = models.CharField(max_length=7, blank=True, null=True)
+    time_unit_of_execution_frequency = models.IntegerField(blank=True, null=True)
+    unit_of_time_to_trigger_error = models.IntegerField(blank=True, null=True)
+    creation_date = models.DateTimeField(blank=True, null=True)
+    update_date = models.DateTimeField(blank=True, null=True)
+    previous_status = models.CharField(max_length=10, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'log_tasks'

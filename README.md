@@ -15,6 +15,15 @@
 - Frenquencia
 - Tempo Inicial e  
 
+**O Django vem com uma ferramenta chamada inspectdb que pode criar os modelos introspectando o banco de dados existente. Você pode verificar a saida rodando este comando:**
+- python manage.py inspectdb
+
+**Salve isso como um arquivo usando o redirecionamento padrão d3 saída Unix**
+-  python manage.py inspectdb > models.py
+
+**nstalando as Tabelas do núcleo do Django.**
+- python manage.py migrate
+
 **Comandos para executar dentro do Mysql**
 - SHOW VARIABLES LIKE 'event%';
 - SET GLOBAL event_scheduler = ON;
