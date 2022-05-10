@@ -9,7 +9,9 @@ class TaskGroups(models.Model):
     b = models.IntegerField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
-
+    
+    def __str__(self):
+        return "%s"%(self.name)
     class Meta:
         managed = True
         db_table = 'task_groups'
@@ -22,7 +24,9 @@ class Tasks(models.Model):
     update_date = models.DateTimeField(blank=True, null=True)
     previous_status = models.CharField(max_length=10, blank=True, null=True)
     task_group = models.ForeignKey(TaskGroups, models.DO_NOTHING)
-
+    
+    def __str__(self):
+        return "%s"%(self.name)
     class Meta:
         managed = True
         db_table = 'tasks'
@@ -37,7 +41,9 @@ class LogTasks(models.Model):
     creation_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
     previous_status = models.CharField(max_length=10, blank=True, null=True)
-
+    
+    def __str__(self):
+        return "%s"%(self.name)
     class Meta:
         managed = True
         db_table = 'log_tasks'
