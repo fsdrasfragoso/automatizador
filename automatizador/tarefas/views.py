@@ -46,3 +46,14 @@ def updateStatusTask(request):
         t.update_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         t.save()
     return HttpResponse(taskInstance[0].id)
+
+@csrf_exempt
+def updateStatusLogTask(request):
+    taskInstance = LogTasks.objects.filter(id=request.POST.get("idTask", ""))
+    for t in taskInstance:
+        t.previous_status = t.status
+        t.status = 'success'
+        t.update_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        t.save()
+    return HttpResponse(taskInstance[0].id)
+
