@@ -34,7 +34,7 @@ def log_tasks(request,task):
     log_tasks = LogTasks.objects.filter(task=task)
     context = {}
     context['log_tasks'] = log_tasks
-    return render(request,'log_tasks.html',context)
+    return render(request,'logTasks.html',context)
         
 
 @csrf_exempt
