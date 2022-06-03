@@ -6,7 +6,7 @@
 
 
         <table class="table table-ordered table-hover" id="tabelaTasks">
-            <thead>
+            <thead>                
                 <tr>
                     <th>Código</th>
                     <th>Task Name</th>
@@ -19,17 +19,17 @@
                 </tr>
             </thead>
             <tbody>                
-                {% for task in tasks %}
-                <tr style="">
-                    <td>{{ task.id }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.status }}</td>
-                    <td>{{ task.previous_status }}</td>
-                    <td>{{nameTaskGroup}}</td>
-                    <td>{{task.creation_date}}</td>
-                    <td>{{task.update_date}}</td>                    
-                    <td> <a href="javascript:changeTask({{ task.id }})" class="btn btn-sm btn-secondary">Change</a> </td>
-                </tr>  
+                {% for task in tasks %}               
+                 <tr style="">
+                     <td>{{ task.id }}</td>
+                     <td> <a href="{% url 'log_tasks' task.id %}"> {{ task.name }} </a></td>
+                     <td>{{ task.status }}</td>
+                     <td>{{ task.previous_status }}</td>
+                     <td>{{nameTaskGroup}}</td>
+                     <td>{{task.creation_date}}</td>
+                     <td>{{task.update_date}}</td>                    
+                     <td> <a href="javascript:changeTask({{ task.id }})" class="btn btn-sm btn-secondary">Change</a> </td>
+                 </tr>                  
                 {%endfor%} 
             </tbody>
         </table>
