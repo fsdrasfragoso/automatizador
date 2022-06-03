@@ -6,6 +6,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .models import TaskGroups 
 from .models import Tasks
+from .models import LogTasks
 
 def index(request):
     return redirect('task_groups')
@@ -28,6 +29,13 @@ def tasks(request,task_group):
     context['tasks'] = tasks
     context['nameTaskGroup'] = nameTaskGroup[0].name      
     return render(request,'tasks.html',context)
+
+def log_tasks(request,task):
+    log_tasks = LogTasks.objects.filter(task=task)
+    context = {}
+    context['log_tasks'] = log_tasks
+    return render(request,'log_tasks.html',context)
+        
 
 @csrf_exempt
 def updateStatusTask(request):
