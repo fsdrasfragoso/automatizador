@@ -32,8 +32,10 @@ def tasks(request,task_group):
 
 def log_tasks(request,task):
     log_tasks = LogTasks.objects.filter(task=task)
+    task = Tasks.objects.filter(id=task)
     context = {}
     context['log_tasks'] = log_tasks
+    context['idTaskGroup'] = task[0].task_group_id  
     return render(request,'logTasks.html',context)
         
 

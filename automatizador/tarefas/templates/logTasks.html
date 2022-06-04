@@ -21,7 +21,7 @@
                 {% for task in log_tasks %}
                 <tr style="">
                     <td>{{ task.id }}</td>
-                    <td>{{ task.name }}</td>
+                    <td><a href="{% url 'tasks' idTaskGroup %}"> {{ task.name }} </a></td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.previous_status }}</td>                   
                     <td>{{task.creation_date}}</td>
