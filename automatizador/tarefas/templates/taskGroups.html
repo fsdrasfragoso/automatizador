@@ -4,16 +4,18 @@
 {% endblock %}
 {% block content %}
 {% for taskGroup in taskGroups %}
-<div class="col-lg-3 col-6">       
+<div class="col-lg-3 col-6" >  <!-- style = "@media (min-width: 992px) flex: 0 0 20% !important; max-width: 20% !important;" 
+                                   aumentar a quantidade de quadras por linha na tela. -->       
     <!-- small box -->
-    <div class="small-box bg-info" style="background-color: rgb({{taskGroup.r}} {{taskGroup.g}} {{taskGroup.b}}) !important">
+    <div class="small-box bg-info" style="background-color: rgb({{taskGroup.r}} {{taskGroup.g}} {{taskGroup.b}}) !important;">
         <div class="inner">
           <h3>{{ taskGroup.name }}</h3>
           <p> Tarefas com error:</p>
-          
+         <!-- Lembrar de mostrar apenas a primeira tasks com erro.-->
           {%for t in taskGroup.tasks_set.all %} 
               {% if t.status == 'error' %}
-                <p> {{ t.name }} <p>                 
+                <p> {{ t.name }} <p>            
+                
               {% endif %}    
           {%endfor%}
          
