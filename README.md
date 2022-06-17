@@ -154,3 +154,5 @@ VALUES
 		OLD.`previous_status`
 	);
 END
+
+**Um Dockerfile para Nginx**
